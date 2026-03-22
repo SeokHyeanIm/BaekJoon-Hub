@@ -119,7 +119,7 @@ def create_pages():
 
     solved, problems = read_problems_file()
 
-    for (root, directories, files) in os.walk("."):
+    for (root, directories, files) in os.walk("백준"):
         for d in directories:
             d_path = os.path.join(root, d)
             if d_path not in solved:
