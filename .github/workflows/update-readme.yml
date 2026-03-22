@@ -1,5 +1,7 @@
 name: Update Problems # GitHub Actions 탭에서 확인할 수 있는 액션 이름
 
+
+
 on: # jobs가 실행되어야 하는 상황 정의
   push:
     branches: [ "main" ] # main 브랜치에 push가 발생했을 때
@@ -27,12 +29,12 @@ jobs: # 실제 실행될 내용
     - name: Run update.py # 2) update.py 실행
       run: |
         python update.py
-    - name: Commit changes # 3) 추가된 파일 commit
+    - name: Commit changes
       run: |
-        git config --global user.name 'SeokHyeanlm' # 유저명
-        git config --global user.email 'y_natge@naver.com' # 유저 이메일
+        git config --global user.name 'SeokHyeanlm'
+        git config --global user.email 'y_natge@naver.com'
         git add -A
-        git commit -am "auto update README.md & Notion Database" # 커밋 메시지
+        git diff --cached --quiet && echo "nothing to commit, skip" || git commit -m "auto update README.md & Notion Database"
     - name: Push changes # 4) 메인에 푸시
       run: |
         git push
