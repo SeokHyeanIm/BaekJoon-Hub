@@ -135,7 +135,8 @@ def create_pages():
 
                 if not readme or not answer:
                     print(f"[DEBUG] 스킵 (readme/answer 없음): {d_path}")
-                    continue
+                    print(f"[DEBUG] 폴더 내 파일 목록: {os.listdir(d_path)}")  # 이 줄 추가
+                    continue        
 
                 print(f"[DEBUG] 처리 중: {d_path}")
                 data = parse_problem_details(readme, answer)
