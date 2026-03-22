@@ -51,7 +51,7 @@ def parse_problem_details(markdown_file, answer_file):
     memory, time = map(lambda x: x.split(': ')[1], p[1].get_text().replace('[', '').split(', '))
     category = [{"name": c} for c in p[2].get_text().split(', ')]
 
-    LANGUAGE_DICT = {'py': 'python', 'java': 'java'}
+    LANGUAGE_DICT = {'py': 'python', 'java': 'java', 'cc': 'c++'}
     language = LANGUAGE_DICT[os.path.splitext(answer_file)[1][1:]]
 
     return {
@@ -130,13 +130,13 @@ def create_pages():
                 for i in os.listdir(d_path):
                     if i.endswith('.md'):
                         readme = os.path.join(d_path, i)
-                    elif i.endswith('.py') or i.endswith('.java'):
+                    elif i.endswith('.py') or i.endswith('.java') or i.endswith('.cc'):
                         answer = os.path.join(d_path, i)
 
                 if not readme or not answer:
                     print(f"[DEBUG] 스킵 (readme/answer 없음): {d_path}")
-                    print(f"[DEBUG] 폴더 내 파일 목록: {os.listdir(d_path)}")  # 이 줄 추가
-                    continue        
+                    print(f"[DEBUG] 폴더 내 파일 목록: {os.listdir(d_path)}")
+                    continue
 
                 print(f"[DEBUG] 처리 중: {d_path}")
                 data = parse_problem_details(readme, answer)
