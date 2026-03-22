@@ -141,8 +141,11 @@ def create_pages():
                 
                 # add page to the database
                 url = "https://api.notion.com/v1/pages"
-                response = requests.post(url=url, headers=headers, data=json_data)
+                response = requests.post(url=url, headers=headers, data=json_data) 
                 print(response.status_code)
+                if response.status_code != 200:
+                    print("ERROR:", response.text)  # 실패 원인 출력
+                    break
                 
                 # update problems file
                 solved.append(d_path)
